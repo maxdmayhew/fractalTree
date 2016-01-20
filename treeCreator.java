@@ -13,7 +13,7 @@ public class treeCreator extends JFrame implements ActionListener
 		setLayout(new BorderLayout());
 		//add instances of the two other classes and add them...
 		settings s = new settings();
-		tree t = new tree(s);
+		tree t = new tree();
 		
 		add(s, BorderLayout.SOUTH);
 		add(t, BorderLayout.NORTH);
@@ -21,7 +21,7 @@ public class treeCreator extends JFrame implements ActionListener
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		
+		pack();
 	}
 	
 	public static void main(String [] args)

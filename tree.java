@@ -8,40 +8,31 @@ import javax.swing.JPanel;
 
 
 
-public class tree extends JPanel implements ActionListener
+public class tree extends JPanel 
 {
-	public settings s;
+	//public settings s;
 	public static double angleVar;
 	public static int depthVar;
 	
-	public tree(settings s)
+	public tree()
 	{
 		
 		setBackground(Color.LIGHT_GRAY);
 		setPreferredSize(new Dimension(400, 350));
 		
-		setAngle(-90);
+		//setAngle(-90);
 		
-		System.out.println(angleVar + " ok 25");
+		System.out.println(angleVar + " ok");
 		
-		setDepth(9);
+		//setDepth(9);
 		
+		setVisible(true);
 		
-		
-		// if statement here..
-		update();
 		
 	}
 	
-	private void update()
-	{
-		
-		
-		angleVar = getAngle();
-		System.out.println("hey there");
-		
-	}
-
+	
+	
 	public void drawBranch(Graphics g, int x, int y, double angle, int depth)
 	{		
 		
@@ -57,26 +48,25 @@ public class tree extends JPanel implements ActionListener
 			}
 	}
 	
-	public void paint(Graphics g)
-	{
-		g.setColor(Color.BLACK);
-		System.out.println(angleVar + " lol");
-		drawBranch(g, 200, 340, angleVar, depthVar);
-	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e)
+	public void paintComponent(Graphics g)
 	{
-		// TODO Auto-generated method stub
+		
+		super.paintComponent(g);
+		g.setColor(Color.BLACK);
+		System.out.println(getAngle() + " lol " + getAngle());
+		drawBranch(g, 200, 340, getAngle(), getDepth());
+		
 		
 	}
+	
 	
 	public void setAngle(double x)
 	{
 		angleVar = x;
 	}
 	
-	public static void setDepth(int x)
+	public void setDepth(int x)
 	{
 		depthVar = x;
 	}

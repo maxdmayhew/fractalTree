@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +19,8 @@ import javax.swing.JTextField;
 
 public class settings extends JPanel implements ActionListener
 {
-	double angleRange = 360;
-	double depthRange = 100;
+	double angleRange = -90;
+	double depthRange = 9;
 	
 	JLabel angleTag = new JLabel("Angle: ");
 	JLabel depthTag = new JLabel("Iterations: ");
@@ -35,15 +36,18 @@ public class settings extends JPanel implements ActionListener
 	public double angleVar;
 	public int depthVar;
 	
+	tree t = new tree();
 	
 	public settings()
 	{
-		tree t = new tree(this);
+		
 
 		
 		setUpFormats();
 		setPreferredSize(new Dimension(100, 80));
 		setBackground(Color.DARK_GRAY);;
+		setVisible(true);
+		
 
 		Font font = new Font("Verdana", Font.BOLD, 14);
 		angleTag.setFont(font);
@@ -55,16 +59,13 @@ public class settings extends JPanel implements ActionListener
 		angleData = new JFormattedTextField(angleFormat);
 		angleData.setValue(new Double(angleRange));
 		angleData.setColumns(3);
-		angleData.addActionListener(new angleListener());
-
+		
 		depthData = new JFormattedTextField(depthFormat);
 		depthData.setValue(new Double(depthRange));
-		depthData.setColumns(3);
-		depthData.addActionListener(new depthListener());
-		
+		depthData.setColumns(3);		
 		
 		alter = new JButton("redraw");
-		alter.addActionListener(this);
+		alter.addActionListener(new buttonListener());
 		
 		angleTag.setLabelFor(angleData);
 		depthTag.setLabelFor(depthData);
@@ -90,11 +91,11 @@ public class settings extends JPanel implements ActionListener
 		
 		printthing();
 	
-		
+		setVisible(true);
 		//depthTag.setFont(font);
 		//depthTag.setForeground(Color.white);
 		//add(depthTag);
-			
+		
 	}
 	
 	
@@ -114,43 +115,29 @@ public class settings extends JPanel implements ActionListener
 		depthFormat = NumberFormat.getNumberInstance();
 	}
 
-
-	public class angleListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent arg0, tree t)
-		{
-			double angleTemp = Double.valueOf(angleData.getText());
-			t.setAngle(angleTemp);	
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-	}
 	
-	public class depthListener implements ActionListener
+	public class buttonListener implements ActionListener
 	{
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent arg0)
 		{
-			if(e.getActionCommand().equals("redraw"))
-			{
-				int depthTemp = Integer.valueOf(depthData.getText());
-				System.out.println(depthTemp);
-				tree.setDepth(depthTemp);
-				System.out.println(tree.getDepth() + " rip");
-				depthVar = depthTemp;		
-			}
-
+			
+			
+			int depthTemp = Integer.valueOf(depthData.getText());
+			int angleTemp = Integer.valueOf(angleData.getText());
+			t.setAngle(angleTemp);
+			t.setDepth(depthTemp);
+			System.out.println(t.getDepth() + "HEY YALL");
+			System.out.println(t.getAngle() + "HEY YALL");
+			t.repaint();
 		}
-
 	}
+
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
+
 }
 
